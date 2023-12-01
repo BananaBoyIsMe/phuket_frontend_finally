@@ -103,7 +103,7 @@ const linksList = [
     link: "/attract",
   },
   {
-    title: "Merchendises",
+    title: "Merchandises",
     caption: "Authentic Phuket merchandises",
     icon: "shopping_cart",
     link: "/merch",
