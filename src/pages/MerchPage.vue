@@ -242,27 +242,31 @@ export default defineComponent({
             );
             this.url.push(response.data[i].url);
             this.in_stock.push(response.data[i].in_stock);
-            this.getMerchRating(response.data[i].id);
-            console.log(response.data[i].id + "KAOS");
+           
+            // console.log(response.data[i].id + "KAOS");
           }
+          this.getMerchRating(this.id[0], 0);
+          this.getMerchRating(this.id[1], 1);
+          this.getMerchRating(this.id[2], 2);
+          this.getMerchRating(this.id[3], 3);
         })
         .catch((err) => {
           console.log(err);
         });
     },
-    getMerchRating(id) {
+    getMerchRating(id, position) {
       this.$api
         .get("/dash/4/" + id)
         .then((response) => {
           // console.log((this.id = response.data[0].id));
-          this.merch_dash_id.push(this.id[id]);
-          this.max_merch.push(response.data[0].max_merch);
-          this.avg_merch.push(response.data[0].avg_merch);
-          this.min_merch.push(response.data[0].min_merch);
-          this.count_merch.push(response.data[0].count_merch);
+          // this.merch_dash_id.push(this.id[id]);
+          // this.max_merch.push(response.data[0].max_merch);
+           this.avg_merch[position] = response.data[0].avg_merch;
+          // this.min_merch.push(response.data[0].min_merch);
+          // this.count_merch.push(response.data[0].count_merch);
           // this.star.push(ref(response.data[i].avg_merch));
           // console.log(this.avg_merch + "KAOS");
-          if (this.avg_merch == null) this.avg_merch = 0;
+          if (this.avg_merch[position] == null) this.avg_merch[position] = 0;
         })
         .catch((err) => {
           console.log(err);
