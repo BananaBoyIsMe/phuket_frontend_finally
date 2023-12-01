@@ -193,7 +193,7 @@ export default defineComponent({
 
       merch_dash_id: [],
       max_merch: [],
-      avg_merch: [],
+      avg_merch: [0, 0, 0, 0],
       // avg_merch1: 0,
       // avg_merch2: 0,
       // avg_merch3: 0,
@@ -273,7 +273,7 @@ export default defineComponent({
           // this.count_merch.push(response.data[0].count_merch);
           // this.star.push(ref(response.data[i].avg_merch));
           // console.log(response.data[0].avg_merch + "KAOS");
-          if (this.avg_merch == null) this.avg_merch = 0;
+          if (this.avg_merch[position] == null) this.avg_merch[position] = 0;
         })
         .catch((err) => {
           console.log(err);
