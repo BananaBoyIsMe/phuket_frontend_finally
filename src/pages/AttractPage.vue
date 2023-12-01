@@ -211,26 +211,27 @@ export default defineComponent({
             this.things_to_do.push(response.data[i].things_to_do);
             this.url.push(response.data[i].url);
             this.locations_id.push(response.data[i].locations_id);
-
-            this.getAttractRating(response.data[i].id);
-
             // console.log(response.data[i].id + "  kapsk");
           }
+          this.getAttractRating(this.id[0], 0);
+          this.getAttractRating(this.id[1], 1);
+          this.getAttractRating(this.id[2], 2);
+          this.getAttractRating(this.id[3], 3);
         })
         .catch((err) => {
           console.log(err);
         });
     },
-    getAttractRating(id) {
+    getAttractRating(id, position) {
       this.$api
         .get("/dash/3/" + id)
         .then((response) => {
           // console.log((this.id = response.data[0].id));
-          this.attract_dash_id.push(this.id[id]);
-          this.max_attract.push(response.data[0].max_attract);
-          this.avg_attract.push(response.data[0].avg_attract);
-          this.min_attract.push(response.data[0].min_attract);
-          this.count_attract.push(response.data[0].count_attract);
+          // this.attract_dash_id.push(this.id[id]);
+          // this.max_attract.push(response.data[0].max_attract);
+          this.avg_attract[position] = response.data[0].avg_attract;
+          // this.min_attract.push(response.data[0].min_attract);
+          // this.count_attract.push(response.data[0].count_attract);
           // this.star.push(ref(response.data[i].avg_attract));
           // console.log(this.avg_attract + "KAOS");
           if (this.avg_attract == null) this.avg_attract = 0;
