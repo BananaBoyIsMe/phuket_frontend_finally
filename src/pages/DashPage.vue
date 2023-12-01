@@ -26,7 +26,7 @@
               <q-td key="num_rating" :props="props">
                 {{ props.row.num_rating }}</q-td
               >
-              //<q-td key="att_id" :props="props"> {{ props.row.att_id }}</q-td>
+              <!--<q-td key="att_id" :props="props"> {{ props.row.att_id }}</q-td>-->
               <q-td key="att_name" :props="props">
                 {{ props.row.att_name }}</q-td
               >
@@ -51,9 +51,9 @@
               <q-td key="num_rating" :props="props">
                 {{ props.row.num_rating }}</q-td
               >
-             // <q-td key="merch_id" :props="props">
-             //   {{ props.row.merch_id }}</q-td
-             // >
+             <!-- <q-td key="merch_id" :props="props">
+                {{ props.row.merch_id }}</q-td
+              > -->
               <q-td key="merch_name" :props="props">
                 {{ props.row.merch_name }}</q-td
               >
