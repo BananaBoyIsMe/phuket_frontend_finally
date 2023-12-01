@@ -105,13 +105,13 @@ export default defineComponent({
           align: "left",
           sortable: true,
         },
-        {
-          name: "att_id",
-          label: "Att_id",
-          field: "att_id",
-          align: "left",
-          sortable: true,
-        },
+        // {
+        //   name: "att_id",
+        //   label: "Att_id",
+        //   field: "att_id",
+        //   align: "left",
+        //   sortable: true,
+        // },
         {
           name: "att_name",
           label: "Att_name",
@@ -137,13 +137,13 @@ export default defineComponent({
           align: "left",
           sortable: true,
         },
-        {
-          name: "merch_id",
-          label: "Merch_id",
-          field: "merch_id",
-          align: "left",
-          sortable: true,
-        },
+        // {
+        //   name: "merch_id",
+        //   label: "Merch_id",
+        //   field: "merch_id",
+        //   align: "left",
+        //   sortable: true,
+        // },
         {
           name: "merch_name",
           label: "Merch_name",
