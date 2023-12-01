@@ -27,6 +27,9 @@
                 {{ props.row.num_rating }}</q-td
               >
               <q-td key="att_id" :props="props"> {{ props.row.att_id }}</q-td>
+              <q-td key="att_name" :props="props">
+                {{ props.row.att_name }}</q-td
+              >
             </q-tr>
           </template>
         </q-table>
@@ -50,6 +53,9 @@
               >
               <q-td key="merch_id" :props="props">
                 {{ props.row.merch_id }}</q-td
+              >
+              <q-td key="merch_name" :props="props">
+                {{ props.row.merch_name }}</q-td
               >
             </q-tr>
           </template>
@@ -106,6 +112,13 @@ export default defineComponent({
           align: "left",
           sortable: true,
         },
+        {
+          name: "att_name",
+          label: "Att_name",
+          field: "att_name",
+          align: "left",
+          sortable: true,
+        },
       ],
 
       merch_rows: [],
@@ -128,6 +141,13 @@ export default defineComponent({
           name: "merch_id",
           label: "Merch_id",
           field: "merch_id",
+          align: "left",
+          sortable: true,
+        },
+        {
+          name: "merch_name",
+          label: "Merch_name",
+          field: "merch_name",
           align: "left",
           sortable: true,
         },
