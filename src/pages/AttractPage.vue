@@ -4,7 +4,7 @@
       src="https://z.cdrst.com/foto/localidad/605d/cover/localidad-2d68.jpg"
       height="200px"
     >
-      <div class="absolute-full text-subtitle2 flex flex-center">
+      <div class="absolute-full text-subtitle2 flex flex-center q-pb-xl">
         <h4>🍹 Phuket Tourist Attractions 🏖️</h4>
       </div>
     </q-img>
@@ -116,17 +116,17 @@
         </q-card>
       </div> -->
     </div>
-    <div class="q-pa-xl text-white">.</div>
-    <div class="q-pa-xl text-white">.</div>
-    <div class="q-pa-xl text-white">.</div>
-    <div class="q-pa-xl text-white">.</div>
-    <div class="q-pa-xl text-white">.</div>
 
     <!-- <div flex flex-center>
       <q-btn v-for="page in pages" :key="page"> {{ page }}</q-btn>
     </div> -->
 
     <!-- <q-btn @click="test" flat> test button </q-btn> -->
+    <div class="q-pa-xl text-white">.</div>
+    <div class="q-pa-xl text-white">.</div>
+    <div class="q-pa-xl text-white">.</div>
+    <div class="q-pa-xl text-white">.</div>
+    <div class="q-pa-xl text-white">.</div>
   </q-page>
 </template>
 
@@ -211,6 +211,7 @@ export default defineComponent({
             this.things_to_do.push(response.data[i].things_to_do);
             this.url.push(response.data[i].url);
             this.locations_id.push(response.data[i].locations_id);
+
             // console.log(response.data[i].id + "  kapsk");
           }
           this.getAttractRating(this.id[0], 0);
@@ -228,13 +229,13 @@ export default defineComponent({
         .then((response) => {
           // console.log((this.id = response.data[0].id));
           // this.attract_dash_id.push(this.id[id]);
-          // this.max_attract.push(response.data[0].max_attract);
+          // this.max_attract[position] = response.data[0].max_attract;
           this.avg_attract[position] = response.data[0].avg_attract;
           // this.min_attract.push(response.data[0].min_attract);
           // this.count_attract.push(response.data[0].count_attract);
           // this.star.push(ref(response.data[i].avg_attract));
-          // console.log(this.avg_attract + "KAOS");
-          if (this.avg_attract[position] == null) this.avg_attract[position] = 0;
+          console.log(this.avg_attract + "KAOS");
+          if (this.avg_attract == null) this.avg_attract = 0;
         })
         .catch((err) => {
           console.log(err);
@@ -253,6 +254,7 @@ export default defineComponent({
       this.storeAttract.offset
     );
     await this.getAllAttract();
+
     // this.storeAttract.curPage = this.storeAttract.getOffset / 4 + 1;
     // console.log(this.storeAttract.curPage);
     // for (let i = 1; i <= 4; i++) this.getAttractRating(i);
@@ -263,6 +265,7 @@ export default defineComponent({
     //   this.storeAttract.getOffset,
     //   this.storeAttract.curPage
     // );
+
     this.load = true;
     if (this.storeLogUser.getFullname == null) this.$router.push("/");
     if (this.storeLogUser.getFullname == "") this.$router.push("/");
