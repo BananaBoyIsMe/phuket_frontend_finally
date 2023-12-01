@@ -234,7 +234,7 @@ export default defineComponent({
           // this.count_attract.push(response.data[0].count_attract);
           // this.star.push(ref(response.data[i].avg_attract));
           // console.log(this.avg_attract + "KAOS");
-          if (this.avg_attract == null) this.avg_attract = 0;
+          if (this.avg_attract[position] == null) this.avg_attract[position] = 0;
         })
         .catch((err) => {
           console.log(err);
