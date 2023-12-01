@@ -168,7 +168,7 @@ export default defineComponent({
 
       attract_dash_id: [],
       max_attract: [],
-      avg_attract: [],
+      avg_attract: [0, 0, 0, 0],
       min_attract: [],
       count_attract: [],
 
