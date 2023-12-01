@@ -8,17 +8,14 @@
         <h4>🎁 Phuket Merchandise Store 🏷️</h4>
       </div>
     </q-img>
-    <div class="row" style="height: 150px; width: 1150px">
+    <div class="row" style="height: 150px; width: 1150px" v-if="load">
       <div
         class="q-pa-sm"
         style="height: 280px; width: 285px"
         v-for="i in 4"
         :key="i"
       >
-        <q-card
-          class="my-card"
-          v-if="id[i - 1] != null && in_stock[i - 1] > 0 && load"
-        >
+        <q-card class="my-card" v-if="id[i - 1] != null && in_stock[i - 1] > 0">
           <img
             :src="img[i - 1]"
             width=""
@@ -139,11 +136,6 @@
         </q-card>
       </div> -->
     </div>
-    <div class="q-pa-xl text-white">.</div>
-    <div class="q-pa-xl text-white">.</div>
-    <div class="q-pa-xl text-white">.</div>
-    <div class="q-pa-xl text-white">.</div>
-    <div class="q-pa-xl text-white">.</div>
 
     <!-- <div flex flex-center>
       <q-btn v-for="page in pages" :key="page"> {{ page }}</q-btn>
@@ -197,6 +189,10 @@ export default defineComponent({
       merch_dash_id: [],
       max_merch: [],
       avg_merch: [],
+      // avg_merch1: 0,
+      // avg_merch2: 0,
+      // avg_merch3: 0,
+      // avg_merch4: 0,
       min_merch: [],
       count_merch: [],
 
@@ -204,8 +200,9 @@ export default defineComponent({
     };
   },
   methods: {
-    getAllMerch() {
-      this.$api
+    async getAllMerch() {
+      this.load = false;
+      await this.$api
         .get("/merch/")
         // .get("/merch/4/0")
         .then((response) => {
@@ -213,8 +210,6 @@ export default defineComponent({
           let pages = 0;
           for (let i = 0; response.data[i] != null; i++) {
             pages++;
-
-            // console.log("JSOJAOS   " + response.data[i].id);
           }
           pages = pages / 4;
           pages = Math.ceil(pages);
@@ -224,9 +219,11 @@ export default defineComponent({
         .catch((err) => {
           console.log(err);
         });
+      this.load = true;
     },
-    getSomeMerch(limit, offset) {
-      this.$api
+    async getSomeMerch(limit, offset) {
+      this.load = false;
+      await this.$api
         .get("/merch/" + limit + "/" + offset)
         // .get("/merch/4/0")
         .then((response) => {
@@ -242,9 +239,12 @@ export default defineComponent({
             );
             this.url.push(response.data[i].url);
             this.in_stock.push(response.data[i].in_stock);
-           
             // console.log(response.data[i].id + "KAOS");
           }
+          // console.log(this.id[0]);
+          // console.log(this.id[1]);
+          // console.log(this.id[2]);
+          // console.log(this.id[3]);
           this.getMerchRating(this.id[0], 0);
           this.getMerchRating(this.id[1], 1);
           this.getMerchRating(this.id[2], 2);
@@ -253,39 +253,45 @@ export default defineComponent({
         .catch((err) => {
           console.log(err);
         });
+      this.load = true;
     },
-    getMerchRating(id, position) {
-      this.$api
+    async getMerchRating(id, position) {
+      this.load = false;
+      await this.$api
         .get("/dash/4/" + id)
         .then((response) => {
           // console.log((this.id = response.data[0].id));
           // this.merch_dash_id.push(this.id[id]);
           // this.max_merch.push(response.data[0].max_merch);
-           this.avg_merch[position] = response.data[0].avg_merch;
+          this.avg_merch[position] = response.data[0].avg_merch;
           // this.min_merch.push(response.data[0].min_merch);
           // this.count_merch.push(response.data[0].count_merch);
           // this.star.push(ref(response.data[i].avg_merch));
-          // console.log(this.avg_merch + "KAOS");
-          if (this.avg_merch[position] == null) this.avg_merch[position] = 0;
+          // console.log(response.data[0].avg_merch + "KAOS");
+          if (this.avg_merch == null) this.avg_merch = 0;
         })
         .catch((err) => {
           console.log(err);
         });
+      this.load = true;
     },
     linkkk(id) {
       this.$router.push("/merch/" + id);
     },
-    addOne(id) {},
+    addOne(id) {
+      this.$route.push("/shop/upload/" + id);
+    },
     test() {},
   },
   async beforeMount() {
     if (this.storeMerch.limit == null) this.storeMerch.limit = 4;
     if (this.storeMerch.offset == null) this.storeMerch.offset = 0;
-    await this.getSomeMerch(this.storeMerch.limit, this.storeMerch.offset);
-    await this.getAllMerch();
 
     if (this.storeLogUser.getFullname == null) this.$router.push("/");
     if (this.storeLogUser.getFullname == "") this.$router.push("/");
+
+    await this.getSomeMerch(this.storeMerch.limit, this.storeMerch.offset);
+    await this.getAllMerch();
 
     this.load = true;
 
@@ -294,3 +300,4 @@ export default defineComponent({
   },
 });
 </script>
+
